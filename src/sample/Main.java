@@ -1,37 +1,40 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sample.components.ElementsFlowPane;
-import sample.components.ElementsGridPane;
-import sample.components.ElementsGroup;
-import sample.components.FiguresGroup;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class Main extends Application {
 
-    @Override
-    public void start(Stage primaryStage) {
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("GUIMainForm");
+    @Override public void start(Stage stage) throws FileNotFoundException {
+        // load the image
+        Image image = new Image(new FileInputStream("E:\\8_march.gif"));
 
-//        Label helloWorldLabel = new Label("Label on custom scene!");
-//        helloWorldLabel.setAlignment(Pos.CENTER);
-//        Scene primaryScene = new Scene(helloWorldLabel);
-//        primaryStage.setScene(primaryScene);
-
-//        Group root = new FiguresGroup();
-        Group root = new ElementsGroup();
-//        Pane root = new ElementsGridPane();
-//        Pane root = new ElementsFlowPane();
-        primaryStage.setScene(new Scene(root, 300, 275));
-
-        primaryStage.show();
+        // simple displays ImageView the image as is
+        ImageView iv1 = new ImageView();
+        iv1.setImage(image);
+        FlowPane root = new FlowPane();
+        Scene scene = new Scene(root, 450, 450);
+        scene.setFill(Color.LIME);
+        HBox box = new HBox();
+        box.getChildren().add(iv1);
+        root.getChildren().add(box);
+        stage.setTitle("Authentication");
+        root.setAlignment(Pos.CENTER);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        Application.launch(args);
     }
 }
